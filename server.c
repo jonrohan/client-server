@@ -65,6 +65,9 @@ int main(void)
 		if ((new_fd = accept(sockfd, (struct sockaddr *)&their_addr,&sin_size)) == -1)
 		{
 			//perror("accept");
+			// Connection descriptor should be closed
+			// it could cause memory overflow
+			close(new_fd);
 			continue;
 		}
 		printf("Received request from Client: %s:%d\n",
